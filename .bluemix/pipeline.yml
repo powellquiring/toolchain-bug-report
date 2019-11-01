@@ -69,7 +69,7 @@ stages:
         020-create-classic-vm.sh
     docker_image: l2fprod/bxshell:latest
 
-- name: '3_Copy_Initial_VSI_VHD_to_COS_bucket'
+- name: '3 Copy Initial VSI VHD to COS bucket'
   worker: null
   inputs:
   - type: job
@@ -98,7 +98,7 @@ stages:
   worker: null
   inputs:
   - type: job
-    stage: '3_Copy_Initial_VSI_VHD_to_COS_bucket'
+    stage: '3 Copy Initial VSI VHD to COS bucket'
     job: 3build
     dir_name: null
   triggers:
