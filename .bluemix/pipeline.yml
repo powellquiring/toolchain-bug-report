@@ -1,10 +1,4 @@
 ---
-#defaultBaseImageVersion: latest
-#private_worker:
-#  workerType: public
-#  workerId: public
-#  workerName: ''
-
 properties:
 - name: PREFIX
   value: "{{toolchain.name}}"
@@ -44,13 +38,14 @@ properties:
   type: secure
 
 stages:
-- name: '012_Initialize_and_Create_Initial_VSI'
+- name: '012 Initialize and Create Initial VSI'
   inputs:
   - type: git
     branch: master
     service: ${REPO}
   triggers:
-  - type: stage
+  - type: git
+    events: '{"push":true,"pull_request":false,"pull_request_closed":false}'
   permission:
     execute: TOOLCHAIN_ADMINS
   jobs:
@@ -73,7 +68,7 @@ stages:
   worker: null
   inputs:
   - type: job
-    stage: '012_Initialize_and_Create_Initial_VSI'
+    stage: '012 Initialize and Create Initial VSI'
     job: 012build
     dir_name: null
   triggers:
@@ -94,7 +89,7 @@ stages:
         030-capture-classic-to-cos.sh
     docker_image: l2fprod/bxshell:latest
 
-- name: '4_Import_VHD_into_VPC_image'
+- name: '4 Import VHD into VPC Image'
   worker: null
   inputs:
   - type: job
@@ -123,7 +118,7 @@ stages:
   worker: null
   inputs:
   - type: job
-    stage: '4_Import_VHD_into_VPC_image'
+    stage: '4 Import VHD into VPC Image'
     job: 4build
     dir_name: null
   triggers:
@@ -168,9 +163,9 @@ stages:
       ./vpc-migrate-from-classic/pipeline_build.sh \
         060-cleanup.sh
     docker_image: l2fprod/bxshell:latest
-#hooks:
-#- enabled: true
-#  label: null
-#  ssl_enabled: true
-#  url: https://devops-api.us-south.devops.cloud.ibm.com/v1/messaging/webhook/publish
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: true
+  url: https://devops-api.us-south.devops.cloud.ibm.com/v1/messaging/webhook/publish
 
