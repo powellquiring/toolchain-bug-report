@@ -1,0 +1,176 @@
+---
+#defaultBaseImageVersion: latest
+#private_worker:
+#  workerType: public
+#  workerId: public
+#  workerName: ''
+
+properties:
+- name: PREFIX
+  value: "{{toolchain.name}}"
+  type: text
+- name: VPC_IMAGE_NAME
+  value: "centos-7-plus"
+  type: text
+- name: DATACENTER
+  value: "dal13"
+  type: text
+- name: REGION
+  value: "us-south"
+  type: text
+- name: RESOURCE_GROUP_NAME
+  value: "default"
+  type: text
+- name: COS_SERVICE_NAME
+  value: "${PREFIX}-cos"
+  type: text
+- name: COS_SERVICE_PLAN
+  value: "standard"
+  type: text
+- name: COS_REGION
+  value: "${REGION}"
+  type: text
+- name: COS_BUCKET_NAME
+  value: "${PREFIX}-images"
+  type: text
+- name: IBMCLOUD_API_KEY
+  value: "${API_KEY}"
+  type: secure
+- name: SOFTLAYER_USERNAME
+  value: "${SOFTLAYER_USERNAME}"
+  type: text
+- name: SOFTLAYER_API_KEY
+  value: "${SOFTLAYER_API_KEY}"
+  type: secure
+
+stages:
+- name: '012_Initialize_and_Create_Initial_VSI'
+  inputs:
+  - type: git
+    branch: master
+    service: ${REPO}
+  triggers:
+  - type: stage
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  jobs:
+  - name: 012build
+    type: builder
+    curatedDockerImage: default
+    artifact_dir: ''
+    build_type: customimage
+    script: |+
+      #!/bin/bash
+      env
+      ls
+      ./vpc-migrate-from-classic/pipeline_build.sh \
+        000-prereqs.sh \
+        010-prepare-cos.sh \
+        020-create-classic-vm.sh
+    docker_image: l2fprod/bxshell:latest
+
+- name: '3_Copy_Initial_VSI_VHD_to_COS_bucket'
+  worker: null
+  inputs:
+  - type: job
+    stage: '012_Initialize_and_Create_Initial_VSI'
+    job: 012build
+    dir_name: null
+  triggers:
+  - type: stage
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  jobs:
+  - name: 3build
+    type: builder
+    curatedDockerImage: default
+    artifact_dir: ''
+    build_type: customimage
+    script: |+
+      #!/bin/bash
+      env
+      ls
+      ./vpc-migrate-from-classic/pipeline_build.sh \
+        030-capture-classic-to-cos.sh
+    docker_image: l2fprod/bxshell:latest
+
+- name: '4_Import_VHD_into_VPC_image'
+  worker: null
+  inputs:
+  - type: job
+    stage: '3_Copy_Initial_VSI_VHD_to_COS_bucket'
+    job: 3build
+    dir_name: null
+  triggers:
+  - type: stage
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  jobs:
+  - name: 4build
+    type: builder
+    curatedDockerImage: default
+    artifact_dir: ''
+    build_type: customimage
+    script: |+
+      #!/bin/bash
+      env
+      ls
+      ./vpc-migrate-from-classic/pipeline_build.sh \
+        040-import-image-to-vpc.sh 
+    docker_image: l2fprod/bxshell:latest
+
+- name: '5_Test_VPC_Image'
+  worker: null
+  inputs:
+  - type: job
+    stage: '4_Import_VHD_into_VPC_image'
+    job: 4build
+    dir_name: null
+  triggers:
+  - type: stage
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  jobs:
+  - name: 5build
+    type: builder
+    curatedDockerImage: default
+    artifact_dir: ''
+    build_type: customimage
+    script: |+
+      #!/bin/bash
+      env
+      ls
+      ./vpc-migrate-from-classic/pipeline_build.sh \
+        050-provision-vpc-vsi.sh
+    docker_image: l2fprod/bxshell:latest
+
+- name: '6_Clean_up_everything_except:_Image_COS_and bucket'
+  worker: null
+  inputs:
+  - type: job
+    stage: '5_Test_VPC_Image'
+    job: 5build
+    dir_name: null
+  triggers:
+  - type: stage
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  jobs:
+  - name: 6build
+    type: builder
+    curatedDockerImage: default
+    artifact_dir: ''
+    build_type: customimage
+    script: |+
+      #!/bin/bash
+      env
+      ls
+      ./vpc-migrate-from-classic/pipeline_build.sh \
+        060-cleanup.sh
+    docker_image: l2fprod/bxshell:latest
+#hooks:
+#- enabled: true
+#  label: null
+#  ssl_enabled: true
+#  url: https://devops-api.us-south.devops.cloud.ibm.com/v1/messaging/webhook/publish
+

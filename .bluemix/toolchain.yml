@@ -1,0 +1,53 @@
+version: '2'
+template:
+  name: vpc-tutorials/vpc-migrate-from-classic Toolchain VPC Image Creation from Classic
+  description: "Toolchain template description .\n\nTo get started, click **Create**."
+  required:
+    - repo
+    - build
+
+toolchain:
+  name: 'vpc-toolchain-{{timestamp}}'
+
+services:
+  # Github repos
+  repo:
+    service_id: githubpublic
+    parameters:
+      source_repo_url: "https://github.com/IBM-Cloud/vpc-tutorials"
+      repo_name: "{{toolchain.name}}"
+      type: clone
+      has_issues: false
+      enable_traceability: false
+
+  # Pipelines
+  build:
+    service_id: pipeline
+    parameters:
+      services:
+        - repo
+      name: "Migrate from classic"
+      ui-pipeline: true
+      configuration:
+        content:
+          $text: pipeline.yml
+        env:
+          REPO: repo
+          API_KEY: "{{form.pipeline.parameters.api-key}}"
+          SOFTLAYER_USERNAME: "{{form.pipeline.parameters.softlayer-username}}"
+          SOFTLAYER_API_KEY: "{{form.pipeline.parameters.softlayer-api-key}}"
+        execute: false
+
+#Deployment
+form:
+  pipeline:
+    schema:
+      $ref: deploy.json
+#    parameters:
+#      softlayer-username: "joe"
+#      app-name: "{{app-name}}"
+#      toolchain-name: "{{toolchain-name}}"
+#      vpc-region: "{{vpc-region}}"
+#      vpc-ssh-key: "{{vpc-ssh-key}}"
+#      target-resource-group: 'default'
+#      vpc-resources-prefix: "{{vpc-resources-prefix}}"

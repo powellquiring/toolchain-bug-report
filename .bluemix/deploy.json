@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "vpc-migrate-from-classic-toolchain",
+  "longDescription": "VPC Migrate from toolchain for vpc-tutorials/vpc-migrate-from-classic.",
+  "type": "object",
+  "properties": {
+    "api-key": {
+      "description": "IBM Cloud API keys reference permissions that grant access to cloud resources. You can obtain your API key with 'ibmcloud iam api-key-create' or via the console at https://cloud.ibm.com/iam/apikeys by clicking **Create an IBM Cloud API key**.",
+      "type": "string"
+    },
+    "softlayer-username": {
+      "description": "Classic infrastructure API user name.  Located via the console at https://cloud.ibm.com/iam/apikeys.  Locate the **Classic infrastructure API key** and click **Details** in the  ... drop down.",
+      "type": "password"
+    },
+    "softlayer-api-key": {
+      "description": "Classic infrastructure API key.  Located via the console at https://cloud.ibm.com/iam/apikeys.  Locate the **Classic infrastructure API key** and click **Details** in the  ... drop down.",
+      "type": "password"
+    }
+  },
+  "required": ["api-key", "softlayer-username" ],
+  "form": [
+    {
+      "key": "api-key",
+      "type": "password",
+      "readonly": false,
+      "title": "IBM Cloud API Key"
+    },
+    {
+      "key": "softlayer-username",
+      "type": "string",
+      "title": "Classic infrastructure API user name"
+    },
+    {
+      "key": "softlayer-api-key",
+      "type": "password",
+      "title": "Classic infrastructure API key"
+    }
+  ]
+}
