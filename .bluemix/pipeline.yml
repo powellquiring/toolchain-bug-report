@@ -4,7 +4,7 @@ properties:
   value: "{{toolchain.name}}"
   type: text
 - name: VPC_IMAGE_NAME
-  value: "centos-7-plus"
+  value: "${PREFIX}"
   type: text
 - name: COS_SERVICE_NAME
   value: "${PREFIX}-cos"
