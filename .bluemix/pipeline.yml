@@ -6,15 +6,6 @@ properties:
 - name: VPC_IMAGE_NAME
   value: "centos-7-plus"
   type: text
-- name: DATACENTER
-  value: "dal13"
-  type: text
-- name: REGION
-  value: "us-south"
-  type: text
-- name: RESOURCE_GROUP_NAME
-  value: "default"
-  type: text
 - name: COS_SERVICE_NAME
   value: "${PREFIX}-cos"
   type: text
@@ -26,6 +17,15 @@ properties:
   type: text
 - name: COS_BUCKET_NAME
   value: "${PREFIX}-images"
+  type: text
+- name: DATACENTER
+  value: "${DATACENTER}"
+  type: text
+- name: REGION
+  value: "${REGION}"
+  type: text
+- name: RESOURCE_GROUP_NAME
+  value: "${RESOURCE_GROUP_NAME}"
   type: text
 - name: IBMCLOUD_API_KEY
   value: "${API_KEY}"

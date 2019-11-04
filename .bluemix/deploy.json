@@ -15,9 +15,21 @@
     "softlayer-api-key": {
       "description": "Classic infrastructure API key.  Located via the console at https://cloud.ibm.com/iam/apikeys.  Locate the **Classic infrastructure API key** and click **Details** in the  ... drop down.",
       "type": "password"
+    },
+    "datacenter": {
+      "description": "Classic data center name",
+      "type": "string"
+    },
+    "region": {
+      "description": "Region",
+      "type": "string"
+    },
+    "resource-group-name": {
+      "description": "Resource group name",
+      "type": "string"
     }
   },
-  "required": ["api-key", "softlayer-username" ],
+  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
   "form": [
     {
       "key": "api-key",
@@ -34,6 +46,21 @@
       "key": "softlayer-api-key",
       "type": "password",
       "title": "Classic infrastructure API key"
+    },
+    {
+      "key": "datacenter",
+      "type": "string",
+      "title": "Classic data center"
+    },
+    {
+      "key": "region",
+      "type": "string",
+      "title": "Region"
+    },
+    {
+      "key": "resource-group-name",
+      "type": "string",
+      "title": "Resource group name"
     }
   ]
 }

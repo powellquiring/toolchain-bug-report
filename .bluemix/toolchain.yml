@@ -36,6 +36,9 @@ services:
           API_KEY: "{{form.pipeline.parameters.api-key}}"
           SOFTLAYER_USERNAME: "{{form.pipeline.parameters.softlayer-username}}"
           SOFTLAYER_API_KEY: "{{form.pipeline.parameters.softlayer-api-key}}"
+          DATACENTER: "{{form.pipeline.parameters.datacenter}}"
+          REGION: "{{form.pipeline.parameters.region}}"
+          RESOURCE_GROUP_NAME: "{{form.pipeline.parameters.resource-group-name}}"
         execute: false
 
 #Deployment
@@ -43,11 +46,7 @@ form:
   pipeline:
     schema:
       $ref: deploy.json
-#    parameters:
-#      softlayer-username: "joe"
-#      app-name: "{{app-name}}"
-#      toolchain-name: "{{toolchain-name}}"
-#      vpc-region: "{{vpc-region}}"
-#      vpc-ssh-key: "{{vpc-ssh-key}}"
-#      target-resource-group: 'default'
-#      vpc-resources-prefix: "{{vpc-resources-prefix}}"
+    parameters:
+      datacenter: "dal13"
+      region: "us-south"
+      resource-group-name: "default"
