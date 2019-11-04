@@ -48,5 +48,5 @@ form:
       $ref: deploy.json
     parameters:
       datacenter: "dal13"
-      region: "{{prodRegion}}"
+      region: "us-south"
       resource-group-name: "default"
