@@ -48,9 +48,8 @@
       "title": "IBM Cloud API Key"
     },
     {
-      "type": "select",
+      "type": "string",
       "key": "tarron",
-      "readonly": true,
       "title": "Region"
     },
     {
