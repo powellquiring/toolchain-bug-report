@@ -26,16 +26,12 @@
       "description": "Classic data center short name.  Find the short name codes here: https://cloud.ibm.com/docs/overview?topic=overview-zero-downtime#locations-and-zones",
       "type": "string"
     },
-    "region": {
-      "description": "Region",
-      "type": "string"
-    },
     "resource-group-name": {
       "description": "Resource group name",
       "type": "string"
     }
   },
-  "required": ["target-region", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
+  "required": ["target-region", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "resource-group-name" ],
   "form": [
     {
       "key": "api-key",
@@ -63,11 +59,6 @@
       "key": "datacenter",
       "type": "string",
       "title": "Classic data center"
-    },
-    {
-      "key": "region",
-      "type": "string",
-      "title": "Region"
     },
     {
       "key": "resource-group-name",
