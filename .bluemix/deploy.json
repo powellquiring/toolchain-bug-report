@@ -34,6 +34,10 @@
   "required": ["target-region", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "resource-group-name" ],
   "form": [
     {
+      "type": "validator",
+      "url": "/devops/setup/bm-helper/custom_helper.html"
+    },
+    {
       "key": "api-key",
       "type": "password",
       "readonly": false,
