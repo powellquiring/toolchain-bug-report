@@ -1,44 +1,44 @@
 ---
 properties:
-- name: TARGET_REGION_ID
-  value: "${TARGET_REGION_ID}"
-  type: text
 - name: PREFIX
   value: "{{toolchain.name}}"
   type: text
-- name: VPC_IMAGE_NAME
-  value: "${PREFIX}"
-  type: text
-- name: COS_SERVICE_NAME
-  value: "${PREFIX}-cos"
-  type: text
-- name: COS_SERVICE_PLAN
-  value: "standard"
-  type: text
-- name: COS_REGION
-  value: "${REGION}"
-  type: text
-- name: COS_BUCKET_NAME
-  value: "${PREFIX}-images"
-  type: text
-- name: DATACENTER
-  value: "${DATACENTER}"
-  type: text
-- name: REGION
-  value: "${REGION}"
-  type: text
-- name: RESOURCE_GROUP_NAME
-  value: "${RESOURCE_GROUP_NAME}"
-  type: text
-- name: IBMCLOUD_API_KEY
-  value: "${API_KEY}"
-  type: secure
-- name: SOFTLAYER_USERNAME
-  value: "${SOFTLAYER_USERNAME}"
-  type: text
-- name: SOFTLAYER_API_KEY
-  value: "${SOFTLAYER_API_KEY}"
-  type: secure
+#- name: TARGET_REGION_ID
+#  value: "${TARGET_REGION_ID}"
+#  type: text
+#- name: VPC_IMAGE_NAME
+#  value: "${PREFIX}"
+#  type: text
+#- name: COS_SERVICE_NAME
+#  value: "${PREFIX}-cos"
+#  type: text
+#- name: COS_SERVICE_PLAN
+#  value: "standard"
+#  type: text
+#- name: COS_REGION
+#  value: "${REGION}"
+#  type: text
+#- name: COS_BUCKET_NAME
+#  value: "${PREFIX}-images"
+#  type: text
+#- name: DATACENTER
+#  value: "${DATACENTER}"
+#  type: text
+#- name: REGION
+#  value: "${REGION}"
+#  type: text
+#- name: RESOURCE_GROUP_NAME
+#  value: "${RESOURCE_GROUP_NAME}"
+#  type: text
+#- name: IBMCLOUD_API_KEY
+#  value: "${API_KEY}"
+#  type: secure
+#- name: SOFTLAYER_USERNAME
+#  value: "${SOFTLAYER_USERNAME}"
+#  type: text
+#- name: SOFTLAYER_API_KEY
+#  value: "${SOFTLAYER_API_KEY}"
+#  type: secure
 
 stages:
 - name: '012 Initialize and Create Initial VSI'
