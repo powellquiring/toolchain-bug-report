@@ -33,6 +33,7 @@ services:
           $text: pipeline.yml
         env:
           REPO: repo
+          TARGET_REGION: "{{form.pipeline.parameters.target-region}}"
           API_KEY: "{{form.pipeline.parameters.api-key}}"
           SOFTLAYER_USERNAME: "{{form.pipeline.parameters.softlayer-username}}"
           SOFTLAYER_API_KEY: "{{form.pipeline.parameters.softlayer-api-key}}"

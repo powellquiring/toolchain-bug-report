@@ -4,6 +4,12 @@
   "longDescription": "VPC Migrate from toolchain for vpc-tutorials/vpc-migrate-from-classic.",
   "type": "object",
   "properties": {
+    "target-region": {
+      "description": "The IBM Cloud region",
+      "type": "string",
+      "disabled": false
+    },
+
     "api-key": {
       "description": "IBM Cloud API keys reference permissions that grant access to cloud resources. You can obtain your API key with 'ibmcloud iam api-key-create' or via the console at https://cloud.ibm.com/iam/apikeys by clicking **Create an IBM Cloud API key**.",
       "type": "string"
@@ -17,19 +23,25 @@
       "type": "password"
     },
     "datacenter": {
-      "description": "Classic data center name",
+      "description": "Classic data center short name.  Find the short name codes here: https://cloud.ibm.com/docs/overview?topic=overview-zero-downtime#locations-and-zones",
       "type": "string"
     },
     "region": {
       "description": "Region",
       "type": "string"
     },
+    {
+      "type": "select",
+      "key": "target-region",
+      "readonly": true,
+      "title": "Region"
+    },
     "resource-group-name": {
       "description": "Resource group name",
       "type": "string"
     }
   },
-  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
+  "required": ["target-region", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
   "form": [
     {
       "key": "api-key",
