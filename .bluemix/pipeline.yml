@@ -1,8 +1,5 @@
 ---
 properties:
-- name: TARGET_REGION_ID
-  value: "${TARGET_REGION_ID}"
-  type: text
 - name: PREFIX
   value: "{{toolchain.name}}"
   type: text
