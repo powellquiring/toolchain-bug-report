@@ -4,7 +4,7 @@
   "longDescription": "VPC Migrate from toolchain for vpc-tutorials/vpc-migrate-from-classic.",
   "type": "object",
   "properties": {
-    "target-region": {
+    "tarron": {
       "description": "The IBM Cloud region",
       "type": "string",
       "disabled": false
@@ -26,12 +26,16 @@
       "description": "Classic data center short name.  Find the short name codes here: https://cloud.ibm.com/docs/overview?topic=overview-zero-downtime#locations-and-zones",
       "type": "string"
     },
+    "region": {
+      "description": "Region",
+      "type": "string"
+    },
     "resource-group-name": {
       "description": "Resource group name",
       "type": "string"
     }
   },
-  "required": ["target-region", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "resource-group-name" ],
+  "required": ["tarron", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
   "form": [
     {
       "type": "validator",
@@ -45,9 +49,9 @@
     },
     {
       "type": "select",
-      "key": "target-region",
+      "key": "tarron",
       "readonly": true,
-      "title": "RegionTODO"
+      "title": "Region"
     },
     {
       "key": "softlayer-username",
@@ -65,9 +69,15 @@
       "title": "Classic data center"
     },
     {
+      "key": "region",
+      "type": "string",
+      "title": "Region"
+    },
+    {
       "key": "resource-group-name",
       "type": "string",
       "title": "Resource group name"
     }
   ]
 }
+
