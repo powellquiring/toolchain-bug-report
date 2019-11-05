@@ -38,16 +38,16 @@
   "required": ["target-region", "api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
   "form": [
     {
-      "type": "select",
-      "key": "target-region",
-      "readonly": true,
-      "title": "Region"
-    },
-    {
       "key": "api-key",
       "type": "password",
       "readonly": false,
       "title": "IBM Cloud API Key"
+    },
+    {
+      "type": "select",
+      "key": "target-region",
+      "readonly": true,
+      "title": "Region"
     },
     {
       "key": "softlayer-username",
