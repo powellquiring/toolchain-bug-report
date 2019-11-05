@@ -50,5 +50,5 @@ form:
     parameters:
       datacenter: "dal13"
       #region: "us-south"
-      #region: "{{region}}"
+      region: "{{region}}"
       resource-group-name: "default"
