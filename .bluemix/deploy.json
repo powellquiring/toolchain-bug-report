@@ -69,7 +69,8 @@
     },
     {
       "key": "region",
-      "type": "string",
+      "type": "select",
+      "readonly": true,
       "title": "Region"
     },
     {
@@ -79,4 +80,3 @@
     }
   ]
 }
-
