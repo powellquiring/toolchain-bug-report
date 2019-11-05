@@ -43,7 +43,7 @@
       "type": "select",
       "key": "target-region",
       "readonly": true,
-      "title": "Region"
+      "title": "RegionTODO"
     },
     {
       "key": "softlayer-username",
