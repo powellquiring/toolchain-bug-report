@@ -12,7 +12,7 @@
       "description": "Classic infrastructure API user name.  Located via the console at https://cloud.ibm.com/iam/apikeys.  Locate the **Classic infrastructure API key** and click **Details** in the  ... drop down.",
       "type": "password"
     },
-    "softlayer-api-key": {
+    "softlayerapikey": {
       "description": "Classic infrastructure API key.  Located via the console at https://cloud.ibm.com/iam/apikeys.  Locate the **Classic infrastructure API key** and click **Details** in the  ... drop down.",
       "type": "password"
     },
@@ -29,7 +29,7 @@
       "type": "string"
     }
   },
-  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "target-region", "target-resource-group" ],
+  "required": ["api-key", "softlayer-username", "softlayerapikey", "datacenter", "target-region", "target-resource-group" ],
   "form": [
     {
       "type": "validator",
@@ -47,7 +47,7 @@
       "title": "Classic infrastructure API user name"
     },
     {
-      "key": "softlayer-api-key",
+      "key": "softlayerapikey",
       "type": "password",
       "title": "Classic infrastructure API key"
     },
