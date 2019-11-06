@@ -20,7 +20,7 @@
       "description": "Classic data center name",
       "type": "string"
     },
-    "region": {
+    "target-region": {
       "description": "Region",
       "type": "string"
     },
@@ -29,7 +29,7 @@
       "type": "string"
     }
   },
-  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "target-resource-group" ],
+  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "target-region", "target-resource-group" ],
   "form": [
     {
       "type": "validator",
@@ -57,7 +57,7 @@
       "title": "Classic data center"
     },
     {
-      "key": "region",
+      "key": "target-region",
       "type": "string",
       "title": "Region"
     },
