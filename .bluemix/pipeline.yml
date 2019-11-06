@@ -1,7 +1,7 @@
 ---
 properties:
 - name: PREFIX
-  value: "{{toolchain.name}}"
+  value: "BUG"
   type: text
 - name: VPC_IMAGE_NAME
   value: "${PREFIX}"
