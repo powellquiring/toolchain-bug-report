@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "vpc-migrate-from-classic-toolchain",
-  "longDescription": "VPC Migrate from toolchain for vpc-tutorials/vpc-migrate-from-classic.",
+  "longDescription": "VPC custom image create using migrate from classic vpc-tutorials/vpc-migrate-from-classic.",
   "type": "object",
   "properties": {
     "api-key": {

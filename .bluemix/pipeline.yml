@@ -46,26 +46,19 @@ stages:
   triggers:
   - type: git
     events: '{"push":true,"pull_request":false,"pull_request_closed":false}'
-  permission:
-    execute: TOOLCHAIN_ADMINS
   jobs:
   - name: 012build
     type: builder
-    curatedDockerImage: default
-    artifact_dir: ''
     build_type: customimage
     script: |+
       #!/bin/bash
-      env
-      ls
       ./vpc-migrate-from-classic/pipeline_build.sh \
         000-prereqs.sh \
         010-prepare-cos.sh \
         020-create-classic-vm.sh
     docker_image: l2fprod/bxshell:latest
 
-- name: '3 Copy Initial VSI VHD to COS bucket'
-  worker: null
+- name: '3 Capture Initial VSI VHD to COS bucket'
   inputs:
   - type: job
     stage: '012 Initialize and Create Initial VSI'
@@ -73,49 +66,35 @@ stages:
     dir_name: null
   triggers:
   - type: stage
-  permission:
-    execute: TOOLCHAIN_ADMINS
   jobs:
   - name: 3build
     type: builder
-    curatedDockerImage: default
-    artifact_dir: ''
     build_type: customimage
     script: |+
       #!/bin/bash
-      env
-      ls
       ./vpc-migrate-from-classic/pipeline_build.sh \
         030-capture-classic-to-cos.sh
     docker_image: l2fprod/bxshell:latest
 
 - name: '4 Import VHD into VPC Image'
-  worker: null
   inputs:
   - type: job
-    stage: '3 Copy Initial VSI VHD to COS bucket'
+    stage: '3 Capture Initial VSI VHD to COS bucket'
     job: 3build
     dir_name: null
   triggers:
   - type: stage
-  permission:
-    execute: TOOLCHAIN_ADMINS
   jobs:
   - name: 4build
     type: builder
-    curatedDockerImage: default
-    artifact_dir: ''
     build_type: customimage
     script: |+
       #!/bin/bash
-      env
-      ls
       ./vpc-migrate-from-classic/pipeline_build.sh \
         040-import-image-to-vpc.sh 
     docker_image: l2fprod/bxshell:latest
 
 - name: '5_Test_VPC_Image'
-  worker: null
   inputs:
   - type: job
     stage: '4 Import VHD into VPC Image'
@@ -123,24 +102,17 @@ stages:
     dir_name: null
   triggers:
   - type: stage
-  permission:
-    execute: TOOLCHAIN_ADMINS
   jobs:
   - name: 5build
     type: builder
-    curatedDockerImage: default
-    artifact_dir: ''
     build_type: customimage
     script: |+
       #!/bin/bash
-      env
-      ls
       ./vpc-migrate-from-classic/pipeline_build.sh \
         050-provision-vpc-vsi.sh
     docker_image: l2fprod/bxshell:latest
 
 - name: '6_Clean_up_everything_except:_Image_COS_and bucket'
-  worker: null
   inputs:
   - type: job
     stage: '5_Test_VPC_Image'
@@ -148,24 +120,18 @@ stages:
     dir_name: null
   triggers:
   - type: stage
-  permission:
-    execute: TOOLCHAIN_ADMINS
   jobs:
   - name: 6build
     type: builder
-    curatedDockerImage: default
-    artifact_dir: ''
     build_type: customimage
     script: |+
       #!/bin/bash
-      env
-      ls
       ./vpc-migrate-from-classic/pipeline_build.sh \
         060-cleanup.sh
     docker_image: l2fprod/bxshell:latest
-hooks:
-- enabled: true
-  label: null
-  ssl_enabled: true
-  url: https://devops-api.us-south.devops.cloud.ibm.com/v1/messaging/webhook/publish
+#hooks:
+#- enabled: true
+#  label: null
+#  ssl_enabled: true
+#  url: https://devops-api.us-south.devops.cloud.ibm.com/v1/messaging/webhook/publish
 

@@ -7,7 +7,7 @@ template:
     - build
 
 toolchain:
-  name: 'vpc-toolchain-{{timestamp}}'
+  name: 'vpc-image-{{timestamp}}'
 
 services:
   # Github repos
@@ -39,7 +39,7 @@ services:
           DATACENTER: "{{form.pipeline.parameters.datacenter}}"
           REGION: "{{form.pipeline.parameters.region}}"
           RESOURCE_GROUP_NAME: "{{form.pipeline.parameters.resource-group-name}}"
-        execute: false
+        execute: true
 
 #Deployment
 form:
