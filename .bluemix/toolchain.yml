@@ -7,7 +7,7 @@ template:
     - build
 
 toolchain:
-  name: 'vpc-image-{{timestamp}}'
+  name: 'bug'
 
 services:
   # Github repos
