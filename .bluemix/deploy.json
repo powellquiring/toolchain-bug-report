@@ -24,12 +24,12 @@
       "description": "Region",
       "type": "string"
     },
-    "resource-group-name": {
+    "target-resource-group": {
       "description": "Resource group name",
       "type": "string"
     }
   },
-  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "resource-group-name" ],
+  "required": ["api-key", "softlayer-username", "softlayer-api-key", "datacenter", "region", "target-resource-group" ],
   "form": [
     {
       "key": "api-key",
@@ -58,7 +58,7 @@
       "title": "Region"
     },
     {
-      "key": "resource-group-name",
+      "key": "target-resource-group",
       "type": "string",
       "title": "Resource group name"
     }

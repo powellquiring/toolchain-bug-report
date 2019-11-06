@@ -38,7 +38,7 @@ services:
           SOFTLAYER_API_KEY: "{{form.pipeline.parameters.softlayer-api-key}}"
           DATACENTER: "{{form.pipeline.parameters.datacenter}}"
           REGION: "{{form.pipeline.parameters.region}}"
-          RESOURCE_GROUP_NAME: "{{form.pipeline.parameters.resource-group-name}}"
+          RESOURCE_GROUP_NAME: "{{form.pipeline.parameters.target-resource-group}}"
         execute: true
 
 #Deployment
@@ -50,4 +50,4 @@ form:
       datacenter: "dal13"
       #region: "us-south"
       region: "{{region}}"
-      resource-group-name: "default"
+      #target-resource-group: "default"
